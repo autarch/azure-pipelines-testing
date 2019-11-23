@@ -1,0 +1,5 @@
+stages:
+  - template: stage.yml
+    parameters:
+      array1: [1, 2, 3]
+      array2: []
