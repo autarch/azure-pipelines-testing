@@ -1,7 +1,10 @@
 parameters:
   array1: ''
   array2: ''
-  array3: [ 'default', 'value' ]
+  array3: 'default'
+  foo: false
+  bar: 42
+  baz: { foo: "bar" }
 
 stages:
   - stage: Stage1
@@ -10,9 +13,9 @@ stages:
         pool:
           vmImage: ubuntu-16.04
         steps:
-          - bash: |
-              echo "array1 = ${{ join(',', parameters.array1) }}"
-              echo "array2 = ${{ join(',', parameters.array2) }}"
-              echo "array3 = ${{ join(',', parameters.array3) }}"
-              echo "array1 has 1 = ${{ containsValue( parameters.array1, 1 ) }}"
-              echo "array1 has '1' = ${{ containsValue( parameters.array1, '1' ) }}"
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: env|sort
+            env: ${{ parameters }}
+

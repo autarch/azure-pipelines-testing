@@ -3,3 +3,6 @@ stages:
     parameters:
       array1: [1, 2, 3]
       array2: []
+      foo: true
+      bar: 42
+
