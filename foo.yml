@@ -1,0 +1,9 @@
+parameters:
+  size: ''
+  color: ''
+
+jobs:
+  - job: InTemplate
+    bash: |
+      echo "size = $(size)"
+      echo "color = $(color)"

@@ -1,8 +1,15 @@
 stages:
-  - template: stage.yml
-    parameters:
-      array1: [1, 2, 3]
-      array2: []
-      foo: true
-      bar: 42
+  - stage: Stage
+    jobs:
+      - job: GenerateMatrix
+        steps:
+          - bash: |
+              echo '##vso[task.setVariable variable=matrix]{ "template": "foo.yml", "params": { "size": 42, "color": "blue" } }'
+            name: matrixGenerator
 
+      - job: UseMatrix
+        dependsOn: GenerateMatrix
+        strategy:
+          matrix: $[ dependencies.GenerateMatrix.outputs['matrixGenerator.matrix'] ]
+        template: $(template)
+        parameters: $(params)
