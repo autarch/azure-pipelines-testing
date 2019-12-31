@@ -1,9 +1,49 @@
 parameters:
-  size: ''
-  color: ''
+  - name: bool_true_explicit
+    type: boolean
+  - name: bool_false_explicit
+    type: boolean
+  - name: string_true_explicit
+    type: string
+  - name: string_false_explicit
+    type: string
+  - name: bool_true_default
+    type: boolean
+    default: true
+  - name: bool_false_default
+    type: boolean
+    default: false
+  - name: string_true_default
+    type: string
+    default: 'true'
+  - name: string_false_default
+    type: string
+    default: 'false'
 
-jobs:
-  - job: InTemplate
-    bash: |
-      echo "size = $(size)"
-      echo "color = $(color)"
+steps:
+  - bash: |
+      echo "${{ parameters.bool_true_explicit }}"
+      echo "${{ parameters.bool_false_explicit }}"
+      echo "${{ parameters.string_true_explicit }}"
+      echo "${{ parameters.string_false_explicit }}"
+      echo "${{ parameters.bool_true_default }}"
+      echo "${{ parameters.bool_false_default }}"
+      echo "${{ parameters.string_true_default }}"
+      echo "${{ parameters.string_false_default }}"
+  - ${{ if parameters.bool_true_explicit }}:
+    - bash: echo "bool_true_explicit"
+  - ${{ if parameters.bool_false_explicit }}:
+    - bash: echo "bool_false_explicit"
+  - ${{ if parameters.string_true_explicit }}:
+    - bash: echo "string_true_explicit"
+  - ${{ if parameters.string_false_explicit }}:
+    - bash: echo "string_false_explicit"
+  - ${{ if parameters.bool_true_default }}:
+    - bash: echo "bool_true_default"
+  - ${{ if parameters.bool_false_default }}:
+    - bash: echo "bool_false_default"
+  - ${{ if parameters.string_true_default }}:
+    - bash: echo "string_true_default"
+  - ${{ if parameters.string_false_default }}:
+    - bash: echo "string_false_default"
+      
