@@ -7,5 +7,6 @@ stages:
 
         steps:
           - bash: which tar
-          - bash: man tar
+          - bash: ls -l /bin
+          - bash: ls -l /usr/bin
           - bash: tar -h
