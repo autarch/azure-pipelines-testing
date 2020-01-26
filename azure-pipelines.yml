@@ -2,10 +2,10 @@ stages:
   - stage: Stage
     jobs:
       - job: Foo
+        pool:
+          vmImage: windows-latest
+
         steps:
-          - template: foo.yml
-            parameters:
-              bool_true_explicit: true
-              bool_false_explicit: false
-              string_true_explicit: 'true'
-              string_false_explicit: 'false'
+          - bash: which tar
+          - bash: man tar
+          - bash: tar -h
